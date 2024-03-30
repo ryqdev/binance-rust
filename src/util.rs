@@ -1,3 +1,4 @@
+use std::fmt::format;
 use std::io::Read;
 use serde::Deserialize;
 
@@ -12,8 +13,9 @@ pub(crate) fn fetch_price_from_json(body: &str) -> serde_json::Result<(String)> 
     Ok((fp.price).parse().unwrap())
 }
 
-pub(crate) fn fetch_price() -> anyhow::Result<String> {
-    let mut res = reqwest::blocking::get("https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT")?;
+pub(crate) fn fetch_price(symbol: String) -> anyhow::Result<String> {
+    let url = format!("https://api.binance.com/api/v3/ticker/price?symbol={}", symbol);
+    let mut res = reqwest::blocking::get(url)?;
     let mut body = String::new();
     res.read_to_string(&mut body)?;
 
