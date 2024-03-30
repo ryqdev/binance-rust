@@ -1,14 +1,7 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+mod util;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+fn binance_price() -> anyhow::Result<String> {
+    let body = util::fetch_price()?;
+    let price = util::fetch_price_from_json(&body)?;
+    Ok(price)
 }
