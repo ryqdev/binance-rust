@@ -1,5 +1,9 @@
 # binance-rust
 
+```shel
+cargo add binance-rust
+```
+
 e.g.:
 
 ```rust
